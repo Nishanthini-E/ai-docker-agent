@@ -32,6 +32,18 @@ jobs:
       run: |
         pip install -r requirements.txt
         pytest
+    - name: Deploy to EC2
+      uses: appleboy/ssh-action@v1.0.3
+      with:
+        host: ${{ secrets.EC2_HOST }}
+        username: ${{ secrets.EC2_USER }}
+        key: ${{ secrets.EC2_KEY }}
+        script: |
+            docker pull nishanthini23/ai-docker-agent:latest
+            docker stop ai-agent || true
+            docker rm ai-agent || true
+            docker run -d -p 8000:8000 --name ai-agent nishanthini23/ai-docker-agent:latest
+
         
         
 
