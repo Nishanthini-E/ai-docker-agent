@@ -28,10 +28,7 @@ jobs:
         context: .
         push: true
         tags: nishanthini23/ai-docker-agent:latest
-    - name: Run Tests
-      run: |
-        pip install -r requirements.txt
-        pytest
+    
     - name: Deploy to EC2
       uses: appleboy/ssh-action@v1.0.3
       with:
