@@ -3,6 +3,10 @@ import logging
 logging.basicConfig(level=logging.INFO)
 from prometheus_client import start_http_server, Counter
 
+from fastapi import FastAPI
+
+app = FastAPI()
+
 REQUEST_COUNT = Counter('requests_total', 'Total requests')
 @app.get("/")
 def home():
